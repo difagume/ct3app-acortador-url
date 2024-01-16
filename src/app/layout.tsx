@@ -23,7 +23,7 @@ export default function RootLayout({
 		<html lang="es">
 			<body
 				className={cn(
-					'dark container max-w-xl grid gap-4 min-h-screen grid-rows-[auto,1fr,auto] bg-background antialiased font-sans',
+					'dark px-4 sm:container max-w-lg grid gap-4 min-h-screen grid-rows-[auto,1fr,auto] bg-background antialiased font-sans',
 					inter.variable
 				)}
 			>

@@ -73,7 +73,7 @@ export default function HomePage() {
 
 	return (
 		<>
-			<h1 className="text-4xl pt-16 font-extrabold tracking-tight m-auto">Acortador de URL</h1>
+			<h1 className="text-3xl md:text-4xl pt-16 font-extrabold tracking-tight m-auto">Acortador de URL</h1>
 			<Card className="relative">
 				<div
 					aria-hidden="true"
@@ -127,11 +127,16 @@ export default function HomePage() {
 				{shortUrlString && (
 					<CardFooter className="grid">
 						<Separator className="mt-3 mb-6" />
-						<div className="flex justify-around">
-							<div className="flex flex-col justify-center items-center">
+						<div className="flex flex-col sm:flex-row justify-around">
+							<div className="flex flex-col justify-center items-center pb-3 sm:pb-0">
 								<div className="flex items-center gap-2">
 									<ExternalLinkIcon />
-									<Link target="_blank" rel="noopener noreferrer" href={`/${shortUrlString}`}>
+									<Link
+										className="text-sm sm:text-base"
+										target="_blank"
+										rel="noopener noreferrer"
+										href={`/${shortUrlString}`}
+									>
 										{`${window.location.host}/${shortUrlString}`}
 									</Link>
 									<TooltipProvider>
@@ -151,7 +156,7 @@ export default function HomePage() {
 									className={cn('size-7 text-green-500 animate-pulse', showCheckIcon ? 'visible' : 'invisible')}
 								/>
 							</div>
-							<canvas ref={ref} />
+							<canvas className="max-w-32 m-auto sm:m-0" ref={ref} />
 						</div>
 					</CardFooter>
 				)}
