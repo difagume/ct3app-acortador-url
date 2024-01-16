@@ -74,7 +74,18 @@ export default function HomePage() {
 	return (
 		<>
 			<h1 className="text-4xl pt-16 font-extrabold tracking-tight m-auto">Acortador de URL</h1>
-			<Card>
+			<Card className="relative">
+				<div
+					aria-hidden="true"
+					className="absolute right-7 top-0 z-10 h-px w-48"
+					// bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%
+					style={{
+						background:
+							'linear-gradient(90deg, rgba(56, 189, 248, 0) 0%, rgba(56, 189, 248, 0) 0%, rgba(232, 232, 232, 0.2) 33.02%, rgba(143, 143, 143, 0.6719) 64.41%, rgba(236, 72, 153, 0) 98.93%)'
+					}}
+					data-darkreader-inline-bgimage=""
+					data-darkreader-inline-bgcolor=""
+				/>
 				<CardContent>
 					<form onSubmit={handleSubmit}>
 						<div className="pt-6 grid w-full items-center gap-4">
@@ -144,6 +155,14 @@ export default function HomePage() {
 						</div>
 					</CardFooter>
 				)}
+				<div
+					aria-hidden="true"
+					className="absolute bottom-0 left-1 z-10 h-px w-48"
+					style={{
+						background:
+							'linear-gradient(90deg, rgba(56, 189, 248, 0) 0%, rgba(56, 189, 248, 0) 0%, rgba(232, 232, 232, 0.2) 33.02%, rgba(143, 143, 143, 0.4) 64.41%, rgba(236, 72, 153, 0) 98.93%)'
+					}}
+				/>
 			</Card>
 		</>
 	)
