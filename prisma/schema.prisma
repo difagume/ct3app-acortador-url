@@ -6,15 +6,16 @@ generator client {
 }
 
 datasource db {
-    provider = "sqlite"
+    provider = "postgresql"
     url      = env("DATABASE_URL")
 }
 
-model Post {
+model Url {
     id        Int      @id @default(autoincrement())
-    name      String
+    url       String
+    shortUrl  String   @unique
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    @@index([name])
+    @@index([shortUrl])
 }
