@@ -3,6 +3,7 @@
 import { shortUrl } from '@/app/actions'
 import { MenuButtons } from '@/components/menu-buttons'
 import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
@@ -14,7 +15,6 @@ import { useTheme } from 'next-themes'
 import Link from 'next/link'
 import QrCreator from 'qr-creator-ssr'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { Card, CardContent, CardFooter } from './ui/card'
 
 export default function ShortUrl() {
 	const { resolvedTheme } = useTheme()

@@ -1,9 +1,9 @@
 'use client'
 
+import CardUrl from '@/components/ui/card-url'
 import { useToast } from '@/components/ui/use-toast'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 import { Url } from '@prisma/client'
-import CardUrl from './ui/card-url'
 
 export default function MyLinks() {
 	const { toast } = useToast()
