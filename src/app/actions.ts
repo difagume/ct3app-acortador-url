@@ -1,11 +1,12 @@
 'use server'
 
 import { db } from '@/server/db'
+import { Url } from '@prisma/client'
 import { customAlphabet } from 'nanoid'
 
 const alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
 
-export async function shortUrl(url: string) {
+export async function shortUrl(url: string): Promise<Url | undefined> {
 	const nanoid = customAlphabet(alphabet, 5)
 	let shortUrl = nanoid()
 
@@ -13,7 +14,7 @@ export async function shortUrl(url: string) {
 
 	async function createUrl() {
 		try {
-			await db.url.create({
+			return await db.url.create({
 				data: {
 					url: newUrl,
 					shortUrl
@@ -25,7 +26,7 @@ export async function shortUrl(url: string) {
 		}
 	}
 
-	await createUrl()
+	const data = await createUrl()
 
-	return shortUrl
+	return data
 }
