@@ -9,7 +9,7 @@ export default function MyLinks() {
 	const { toast } = useToast()
 	const [urls, setUrls] = useLocalStorage<Omit<Url, 'createdAt' | 'updatedAt' | 'createdById'>[]>('urls', [])
 
-	if (!urls) return
+	if (urls?.length === 0) return
 
 	function handleDelete(urlId: number) {
 		setUrls(urls.filter((url) => url.id !== urlId))
