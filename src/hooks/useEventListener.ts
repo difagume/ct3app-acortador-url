@@ -12,6 +12,7 @@ function useEventListener<K extends keyof WindowEventMap>(
 function useEventListener<KW extends keyof WindowEventMap>(
 	eventName: KW,
 	handler: (event: WindowEventMap[KW] | Event) => void,
+	// @ts-ignore
 	element?: RefObject<T>,
 	options?: boolean | AddEventListenerOptions
 ) {
@@ -24,6 +25,7 @@ function useEventListener<KW extends keyof WindowEventMap>(
 
 	useEffect(() => {
 		// Define the listening target
+		// @ts-ignore
 		const targetElement: T | Window = element?.current ?? window
 
 		if (!targetElement?.addEventListener) return
