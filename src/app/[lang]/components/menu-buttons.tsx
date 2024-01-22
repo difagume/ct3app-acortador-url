@@ -1,6 +1,11 @@
+import { getDictionary } from '@/get-dictionary'
 import { ModeToggle } from './mode-toggle'
 
-export function MenuButtons() {
+export function MenuButtons({
+	dictionary
+}: {
+	dictionary: Awaited<ReturnType<typeof getDictionary>>
+}) {
 	return (
 		<>
 			{/* <Tooltip>
@@ -13,7 +18,7 @@ export function MenuButtons() {
 					<p>Mis links</p>
 				</TooltipContent>
 			</Tooltip> */}
-			<ModeToggle />
+			<ModeToggle dictionary={dictionary} />
 		</>
 	)
 }

@@ -1,9 +1,13 @@
+import { TINY_SUBDOMAIN } from '@/app/[lang]/constants'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Url } from '@prisma/client'
 import { CheckIcon, CopyIcon, ExternalLinkIcon, TrashIcon } from '@radix-ui/react-icons'
 import Link from 'next/link'
 import { useState } from 'react'
+
+const isBrowser = typeof window !== 'undefined'
+const URL_DOMAIN = isBrowser ? `${window.location.origin}/${TINY_SUBDOMAIN}` : ''
 
 interface Props {
 	url: Omit<Url, 'createdAt' | 'updatedAt' | 'createdById'>
@@ -14,7 +18,7 @@ export default function CardUrl({ url, handleDelete }: Props) {
 
 	function handleCopy(url: Omit<Url, 'createdAt' | 'updatedAt' | 'createdById'>) {
 		setHasCopied(true)
-		navigator.clipboard.writeText(window.location.href + url.shortUrl)
+		navigator.clipboard.writeText(`${URL_DOMAIN}/${url.shortUrl}`)
 		setTimeout(() => {
 			setHasCopied(false)
 		}, 1000)
@@ -40,11 +44,11 @@ export default function CardUrl({ url, handleDelete }: Props) {
 			<CardContent className="grid justify-items-start overflow-hidden mr-4">
 				<Link
 					className="flex items-center gap-2 text-2xl font-bold"
-					href={`/${url.shortUrl}`}
+					href={`/${TINY_SUBDOMAIN}/${url.shortUrl}`}
 					target="_blank"
 					rel="noopener noreferrer"
 				>
-					{url.shortUrl}
+					{`${TINY_SUBDOMAIN}/${url.shortUrl}`}
 					<ExternalLinkIcon className="text-muted-foreground" />
 				</Link>
 				<p className="text-xs text-muted-foreground text-left truncate max-w-full pointer-events-none">{url.url}</p>

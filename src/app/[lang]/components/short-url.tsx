@@ -1,13 +1,15 @@
 'use client'
 
-import { shortUrl } from '@/app/actions'
-import { MenuButtons } from '@/components/menu-buttons'
+import { shortUrl } from '@/app/[lang]/actions'
+import { MenuButtons } from '@/app/[lang]/components/menu-buttons'
+import { TINY_SUBDOMAIN } from '@/app/[lang]/constants'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
+import { getDictionary } from '@/get-dictionary'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 import { Url } from '@prisma/client'
 import { CheckIcon, CopyIcon, EraserIcon, ExternalLinkIcon } from '@radix-ui/react-icons'
@@ -16,7 +18,15 @@ import Link from 'next/link'
 import QrCreator from 'qr-creator-ssr'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
-export default function ShortUrl() {
+const isBrowser = typeof window !== 'undefined'
+const HOST_DOMAIN = isBrowser ? `${window.location.host}/${TINY_SUBDOMAIN}` : ''
+const URL_DOMAIN = isBrowser ? `${window.location.origin}/${TINY_SUBDOMAIN}` : ''
+
+export default function ShortUrl({
+	dictionary
+}: {
+	dictionary: Awaited<ReturnType<typeof getDictionary>>
+}) {
 	const { resolvedTheme } = useTheme()
 	const [urls, setUrls] = useLocalStorage<Omit<Url, 'createdAt' | 'updatedAt' | 'createdById'>[]>('urls', [])
 	const [txtUrl, setTxtUrl] = useState<string>('')
@@ -63,7 +73,7 @@ export default function ShortUrl() {
 
 	useEffect(() => {
 		if (link) {
-			generaQr(window.location.href + link.shortUrl)
+			generaQr(`${URL_DOMAIN}/${link.shortUrl}`)
 		}
 	}, [link, generaQr])
 
@@ -95,7 +105,7 @@ export default function ShortUrl() {
 	const handleCopy = useCallback(() => {
 		if (!hasCopied && link) {
 			setHasCopied(true)
-			navigator.clipboard.writeText(window.location.href + link.shortUrl)
+			navigator.clipboard.writeText(`${URL_DOMAIN}/${link.shortUrl}`)
 			setTimeout(() => {
 				setHasCopied(false)
 			}, 2000)
@@ -116,13 +126,13 @@ export default function ShortUrl() {
 			<div className="border-b">
 				<div className="flex h-14 items-center">
 					<div className="ml-auto flex">
-						<MenuButtons />
+						<MenuButtons dictionary={dictionary} />
 					</div>
 				</div>
 			</div>
 			<div className="px-0 container max-w-xl pt-10 sm:pt-10">
 				<div className="grid grid-cols-1 items-center justify-between space-y-5">
-					<h2 className="text-3xl md:text-5xl font-extrabold tracking-tight m-auto">Acortador de URL</h2>
+					<h2 className="text-3xl md:text-5xl font-extrabold tracking-tight m-auto">{dictionary.title}</h2>
 					<Card className="relative">
 						<div
 							aria-hidden="true"
@@ -136,13 +146,13 @@ export default function ShortUrl() {
 							<form onSubmit={handleSubmit}>
 								<div className="pt-6 grid gap-4">
 									<div className="flex flex-col space-y-3">
-										<Label htmlFor="url">Ingresa el URL</Label>
+										<Label htmlFor="url">{dictionary.enterUrl}</Label>
 										<div className="flex gap-2">
 											<Input
 												id="txtUrl"
 												autoFocus
 												required
-												placeholder="url"
+												placeholder="https://..."
 												value={txtUrl}
 												onChange={(e) => setTxtUrl(e.target.value)}
 											/>
@@ -160,12 +170,12 @@ export default function ShortUrl() {
 													</Button>
 												</TooltipTrigger>
 												<TooltipContent>
-													<p>Limpiar</p>
+													<p>{dictionary.clear}</p>
 												</TooltipContent>
 											</Tooltip>
 										</div>
 									</div>
-									<Button className="w-full">Acortar</Button>
+									<Button className="w-full">{dictionary.shorten}</Button>
 								</div>
 							</form>
 						</CardContent>
@@ -180,9 +190,9 @@ export default function ShortUrl() {
 											className="text-sm sm:text-base"
 											target="_blank"
 											rel="noopener noreferrer"
-											href={`/${link.shortUrl}`}
+											href={`/${TINY_SUBDOMAIN}/${link.shortUrl}`}
 										>
-											{`${window.location.host}/${link.shortUrl}`}
+											{`${HOST_DOMAIN}/${link.shortUrl}`}
 										</Link>
 										<Tooltip>
 											<TooltipTrigger asChild>
@@ -191,7 +201,7 @@ export default function ShortUrl() {
 												</Button>
 											</TooltipTrigger>
 											<TooltipContent>
-												<p>Copiar</p>
+												<p>{dictionary.copy}</p>
 											</TooltipContent>
 										</Tooltip>
 									</div>
