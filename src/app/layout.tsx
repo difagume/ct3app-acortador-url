@@ -34,6 +34,10 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="es" suppressHydrationWarning>
+			<head>
+				<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#facc15" />
+				<meta name="msapplication-TileColor" content="#facc15" />
+			</head>
 			<body
 				className={`px-4 grid gap-4 grid-rows-[auto,1fr,auto] bg-background antialiased font-sans ${inter.variable}`}
 			>
