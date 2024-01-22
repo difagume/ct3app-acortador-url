@@ -1,48 +1,48 @@
 {
-    "name": "tinylnk",
-    "short_name": "tinylnk",
-    "description": "Tiny URL shortener",
-    "start_url": "/",
-    "icons": [
-        {
-            "src": "/android-chrome-192x192.png",
-            "sizes": "192x192",
-            "type": "image/png"
-        },
-        {
-            "src": "/android-chrome-512x512.png",
-            "sizes": "512x512",
-            "type": "image/png"
-        }
-    ],
-    "screenshots": [
-        {
-            "src": "/s/screencapture-desktop_1.png",
-            "type": "image/png",
-            "sizes": "1010x906",
-            "form_factor": "wide"
-        },
-        {
-            "src": "/s/screencapture-desktop_2.png",
-            "type": "image/png",
-            "sizes": "1010x906",
-            "form_factor": "wide"
-        },
-        {
-            "src": "/s/screencapture-mobil_1.png",
-            "type": "image/png",
-            "sizes": "324x705",
-            "form_factor": "narrow"
-        },
-        {
-            "src": "/s/screencapture-mobil_2.png",
-            "type": "image/png",
-            "sizes": "324x705",
-            "form_factor": "narrow"
-        }
-    ],
-    "theme_color": "#ffffff",
-    "background_color": "#ffffff",
-    "orientation": "any",
-    "display": "standalone"
+	"name": "tinylnk",
+	"short_name": "tinylnk",
+	"description": "Tiny URL shortener",
+	"start_url": "/",
+	"icons": [
+		{
+			"src": "/android-chrome-192x192.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "/android-chrome-512x512.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		}
+	],
+	"screenshots": [
+		{
+			"src": "/s/screencapture-desktop_1.png",
+			"type": "image/png",
+			"sizes": "1010x906",
+			"form_factor": "wide"
+		},
+		{
+			"src": "/s/screencapture-desktop_2.png",
+			"type": "image/png",
+			"sizes": "1010x906",
+			"form_factor": "wide"
+		},
+		{
+			"src": "/s/screencapture-mobil_1.png",
+			"type": "image/png",
+			"sizes": "324x705",
+			"form_factor": "narrow"
+		},
+		{
+			"src": "/s/screencapture-mobil_2.png",
+			"type": "image/png",
+			"sizes": "324x705",
+			"form_factor": "narrow"
+		}
+	],
+	"theme_color": "#000000",
+	"background_color": "#000000",
+	"orientation": "any",
+	"display": "standalone"
 }

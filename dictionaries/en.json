@@ -1,5 +1,6 @@
 {
 	"title": "URL shortener",
+	"description": "Short link generator",
 	"enterUrl": "Enter the URL",
 	"clear": "Clear",
 	"shorten": "Shorten",

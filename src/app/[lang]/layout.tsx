@@ -4,32 +4,52 @@ import { Inter } from 'next/font/google'
 
 import { ThemeProvider } from '@/components/ui/theme-provider'
 import { Toaster } from '@/components/ui/toaster'
+import { getDictionary } from '@/get-dictionary'
 import { Locale, i18n } from '@/i18n-config'
-import { Viewport } from 'next'
+import { Metadata, Viewport } from 'next'
 
 const inter = Inter({
 	subsets: ['latin'],
 	variable: '--font-sans'
 })
 
-export const metadata = {
-	title: 'Acortador de URL',
-	description: 'Generador de URLs cortas',
-	icons: [
-		{ rel: 'icon', type: 'image/svg+xml', url: '/trim.svg' },
-		{ rel: 'icon', type: 'image/png', sizes: '32x32', url: '/favicon-32x32.png' },
-		{ rel: 'icon', type: 'image/png', sizes: '16x16', url: '/favicon-16x16.png' },
-		{ rel: 'apple-touch-icon', type: 'image/png', sizes: '180x180', url: '/apple-touch-icon.png' }
-	],
-	manifest: '/manifest.webmanifest'
+export async function generateStaticParams() {
+	return i18n.locales.map((locale) => ({ lang: locale }))
+}
+
+export async function generateMetadata({
+	params: { lang }
+}: {
+	params: { lang: Locale }
+}): Promise<Metadata> {
+	const dictionary = await getDictionary(lang)
+
+	return {
+		title: dictionary.title,
+		description: dictionary.description,
+		icons: {
+			icon: [
+				{ url: '/icon.svg', type: 'image/svg+xml' },
+				{ url: '/icon-dark.svg', type: 'image/svg+xml', media: '(prefers-color-scheme: dark)' },
+				{ url: '/icon-32x32.png', type: 'image/png', sizes: '32x32' },
+				{ url: '/icon-16x16.png', type: 'image/png', sizes: '16x16' }
+			],
+			apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }]
+		},
+		other: {
+			rel: 'mask-icon',
+			href: '/safari-pinned-tab.svg',
+			color: '#facc15'
+		},
+		manifest: '/manifest.webmanifest'
+	}
 }
 
 export const viewport: Viewport = {
-	themeColor: 'white'
-}
-
-export async function generateStaticParams() {
-	return i18n.locales.map((locale) => ({ lang: locale }))
+	themeColor: [
+		{ media: '(prefers-color-scheme: light)', color: 'white' },
+		{ media: '(prefers-color-scheme: dark)', color: 'black' }
+	]
 }
 
 export default function RootLayout({
@@ -41,10 +61,6 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang={params.lang} suppressHydrationWarning>
-			<head>
-				<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#facc15" />
-				<meta name="msapplication-TileColor" content="#facc15" />
-			</head>
 			<body
 				className={`px-4 grid gap-4 grid-rows-[auto,1fr,auto] bg-background antialiased font-sans ${inter.variable}`}
 			>

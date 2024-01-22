@@ -1,5 +1,6 @@
 {
 	"title": "Acortador de URL",
+	"description": "Generador de enlaces cortos",
 	"enterUrl": "Ingresa el URL",
 	"clear": "Limpiar",
 	"shorten": "Acortar",
