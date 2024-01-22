@@ -2,10 +2,15 @@
 
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { getDictionary } from '@/get-dictionary'
 import { MoonIcon, SunIcon } from '@radix-ui/react-icons'
 import { useTheme } from 'next-themes'
 
-export function ModeToggle() {
+export function ModeToggle({
+	dictionary
+}: {
+	dictionary: Awaited<ReturnType<typeof getDictionary>>
+}) {
 	const { setTheme } = useTheme()
 
 	return (
@@ -18,9 +23,9 @@ export function ModeToggle() {
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align="end">
-				<DropdownMenuItem onClick={() => setTheme('light')}>Claro</DropdownMenuItem>
-				<DropdownMenuItem onClick={() => setTheme('dark')}>Oscuro</DropdownMenuItem>
-				<DropdownMenuItem onClick={() => setTheme('system')}>Sistema</DropdownMenuItem>
+				<DropdownMenuItem onClick={() => setTheme('light')}>{dictionary.light}</DropdownMenuItem>
+				<DropdownMenuItem onClick={() => setTheme('dark')}>{dictionary.dark}</DropdownMenuItem>
+				<DropdownMenuItem onClick={() => setTheme('system')}>{dictionary.system}</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>
 	)

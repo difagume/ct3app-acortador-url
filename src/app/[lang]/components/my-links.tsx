@@ -1,11 +1,16 @@
 'use client'
 
-import CardUrl from '@/components/ui/card-url'
+import CardUrl from '@/app/[lang]/components/card-url'
 import { useToast } from '@/components/ui/use-toast'
+import { getDictionary } from '@/get-dictionary'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 import { Url } from '@prisma/client'
 
-export default function MyLinks() {
+export default function MyLinks({
+	dictionary
+}: {
+	dictionary: Awaited<ReturnType<typeof getDictionary>>
+}) {
 	const { toast } = useToast()
 	const [urls, setUrls] = useLocalStorage<Omit<Url, 'createdAt' | 'updatedAt' | 'createdById'>[]>('urls', [])
 
@@ -14,7 +19,7 @@ export default function MyLinks() {
 	function handleDelete(urlId: number) {
 		setUrls(urls.filter((url) => url.id !== urlId))
 		toast({
-			description: 'Link eliminado'
+			description: dictionary.linkDeleted
 		})
 	}
 	/* < className="pt-4 sm:pt-8 sm:mx-2 grid gap-4 md:grid-cols-2 lg:grid-cols-4"> */
@@ -24,7 +29,7 @@ export default function MyLinks() {
 	}
 	return (
 		<div className="pt-8 text-center">
-			<h3 className="text-3xl md:text-3xl font-extrabold tracking-tight m-auto">Mis links</h3>
+			<h3 className="text-3xl md:text-3xl font-extrabold tracking-tight m-auto">{dictionary.myLinks} </h3>
 			<div className="flex flex-wrap items-center justify-center">
 				{urls.map((url) => (
 					<CardUrl key={url.id} url={url} handleDelete={handleDelete} />

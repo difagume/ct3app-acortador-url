@@ -1,0 +1,13 @@
+{
+	"title": "URL shortener",
+	"description": "Short link generator",
+	"enterUrl": "Enter the URL",
+	"clear": "Clear",
+	"shorten": "Shorten",
+	"copy": "Copy",
+	"myLinks": "My links",
+	"light": "Light",
+	"dark": "Dark",
+	"system": "System",
+	"linkDeleted": "Link deleted"
+}
