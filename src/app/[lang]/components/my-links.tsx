@@ -4,6 +4,7 @@ import CardUrl from '@/app/[lang]/components/card-url'
 import { useToast } from '@/components/ui/use-toast'
 import { getDictionary } from '@/get-dictionary'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 import { Url } from '@prisma/client'
 
 export default function MyLinks({
@@ -12,6 +13,7 @@ export default function MyLinks({
 	dictionary: Awaited<ReturnType<typeof getDictionary>>
 }) {
 	const { toast } = useToast()
+	const [parent, enableAnimations] = useAutoAnimate(/* optional config */)
 	const [urls, setUrls] = useLocalStorage<Omit<Url, 'createdAt' | 'updatedAt' | 'createdById'>[]>('urls', [])
 
 	if (urls?.length === 0) return
@@ -30,7 +32,7 @@ export default function MyLinks({
 	return (
 		<div className="pt-8 text-center">
 			<h3 className="text-3xl md:text-3xl font-extrabold tracking-tight m-auto">{dictionary.myLinks} </h3>
-			<div className="flex flex-wrap items-center justify-center">
+			<div className="flex flex-wrap items-center justify-center" ref={parent}>
 				{urls.map((url) => (
 					<CardUrl key={url.id} url={url} handleDelete={handleDelete} />
 				))}

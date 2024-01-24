@@ -25,7 +25,7 @@ export default function CardUrl({ url, handleDelete }: Props) {
 	}
 
 	return (
-		<Card className="m-3 w-full max-w-md flex-shrink-0">
+		<Card className="m-3 w-full max-w-md flex-shrink-0 animate-in fade-in-25 duration-300">
 			<CardHeader className="relative flex flex-row items-center justify-between space-y-0 pb-2">
 				{/* <CardTitle className="text-sm font-medium">{url.shortUrl}</CardTitle> */}
 				<div className="absolute top-6 right-6 flex flex-col space-y-2">
