@@ -38,6 +38,7 @@ export function middleware(request: NextRequest) {
 			'/icon-32x32.png',
 			'/favicon.ico',
 			'/manifest.webmanifest',
+			'/maskable_icon_x192.png',
 			'/safari-pinned-tab.svg',
 			'/icon-dark.svg',
 			'/icon.svg'
