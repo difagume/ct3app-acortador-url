@@ -154,6 +154,7 @@ export default function ShortUrl({
 												required
 												placeholder="https://..."
 												value={txtUrl}
+												maxLength={2048}
 												onChange={(e) => setTxtUrl(e.target.value)}
 											/>
 											<Tooltip>
